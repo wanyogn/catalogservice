@@ -1,0 +1,29 @@
+{
+  "version": true,
+  "from": 0,
+  "size": 1000,
+  "sort": [
+    {
+      "flow_number": {
+        "order": "asc"
+      }
+    }
+  ],
+  "query": {
+    "bool": {
+      "must": [
+        {
+          "query_string": {
+              "analyze_wildcard": true,
+              "query":"#query",
+              "phrase_slop":"#phrase_slop"
+          }
+        }
+      ]
+    }
+  },
+  "_source": {
+    "excludes": ["flow_number","catalog_property","introduction"]
+  },
+  "script_fields": {}
+}

@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zhixie.catalog.mapper.PcSearchMapper">
+    <insert id="insertUserSearchInfo" parameterType="map">
+        INSERT INTO zhixie_pcsearch
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="userip != null">
+                userip,
+            </if>
+            <if test="userregion != null">
+                userregion,
+            </if>
+            <if test="usercity != null">
+                usercity,
+            </if>
+            <if test="searchtype != null">
+                searchtype,
+            </if>
+            <if test="keyword != null">
+                keyword,
+            </if>
+            <if test="createdate != null">
+                createdate,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="userip != null">
+                #{userip},
+            </if>
+            <if test="userregion != null">
+                #{userregion},
+            </if>
+            <if test="usercity != null">
+                #{usercity},
+            </if>
+            <if test="searchtype != null">
+                #{searchtype},
+            </if>
+            <if test="keyword != null">
+                #{keyword},
+            </if>
+            <if test="createdate != null">
+                #{createdate},
+            </if>
+        </trim>
+    </insert>
+</mapper>

@@ -1,0 +1,17 @@
+{
+  "query": {
+    "bool": {
+      "must": [
+        {
+          "query_string": {
+            "analyze_wildcard": true,
+            "query":"#query",
+            "phrase_slop":5
+          }
+        }
+      ],
+      "filter": ["#filter"],
+      "must_not": []
+    }
+  }
+}

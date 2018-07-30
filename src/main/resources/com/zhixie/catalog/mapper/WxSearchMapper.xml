@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zhixie.catalog.mapper.WxSearchMapper">
+    <select id="selectWxspUserByOpenid" parameterType="java.lang.String" resultType="com.zhixie.catalog.model.wechat.WxspUserInfo">
+        select * from zhixie_wxuserinfo where openid = #{openid}
+    </select>
+    <select id="selectWxspYXCUserByOpenid" parameterType="java.lang.String" resultType="com.zhixie.catalog.model.wechat.WxspUserInfo">
+        select * from wxsp_userinfo where openid = #{openid}
+    </select>
+    <insert id="insertWxSearchByMap" parameterType="map">
+        INSERT INTO zhixie_wxsearch
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+          <if test="userid != null">
+              userid,
+          </if>
+          <if test="keyword != null">
+            keyword,
+          </if>
+          <if test="createdate != null">
+            createdate,
+          </if>
+          <if test="tag != null">
+            tag,
+          </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="userid != null">
+                #{userid},
+            </if>
+
+            <if test="keyword != null">
+                #{keyword},
+            </if>
+            <if test="createdate != null">
+                #{createdate},
+            </if>
+            <if test="tag != null">
+                #{tag},
+            </if>
+        </trim>
+    </insert>
+    <insert id="insertWxspUserByMap" parameterType="map">
+        INSERT INTO zhixie_wxuserinfo
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="openid != null">
+                openid,
+            </if>
+            <if test="nickname != null">
+                nickname,
+            </if>
+            <if test="sex != null">
+                sex,
+            </if>
+            <if test="createdate != null">
+                createdate,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="openid != null">
+                #{openid},
+            </if>
+            <if test="nickname != null">
+                #{nickname},
+            </if>
+            <if test="sex != null">
+                #{sex},
+            </if>
+            <if test="createdate != null">
+                #{createdate},
+            </if>
+        </trim>
+    </insert>
+</mapper>

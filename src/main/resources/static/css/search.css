@@ -1,0 +1,8 @@
+	body{background: #efefef;color: #337ab7}
+	a{cursor: pointer;}
+	.header{height: 80px;width: 100%;border-bottom: 1px solid #000;}
+	.key,.num{color: #f39800}
+	.left_main{width: 100%;height: auto;background: #fff;margin-top: 10px;}
+	.data-list{border-top: 1px solid #dedddd;margin: 0 40px;padding-top: 10px;padding-bottom: 15px;}
+	.product_number{width: 90%;height: 45px;text-align: center;line-height: 45px;font-size: 26px;color: #14bce9;border: 1px solid #14bce9}
+	.product_title{font-size: 22px;font-weight: bold;border-bottom: 1px solid #dedddd ;padding-bottom: 0px;}

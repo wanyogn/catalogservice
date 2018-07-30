@@ -1,0 +1,122 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>分类目录</title>
+	<link rel="stylesheet" type="text/css" href="css/bootstrap/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="css/index.css">
+	<script type="text/javascript" src="js/jquery-3.2.1.min.js"></script>
+	<script type="text/javascript" src="js/bootstrap.min.js"></script>
+	<script type="text/javascript" src="js/layer/layer.js"></script>
+	<script type="text/javascript" src="js/index.js"></script>
+</head>
+<body>
+<div class="header">
+	<div class="container" style="line-height: 30px;">
+		<div class="row">
+			<div class="pull-left">
+				左边
+			</div>
+			<div class="pull-right">
+				右边
+			</div>
+		</div>
+	</div>
+</div>
+<div class="content">
+	<div class="container">
+		<div class="row" style="margin-top: 50px;">
+			<div class="col-md-10 col-md-offset-1 container_search" >
+				<h2>医疗器械分类目录速查</h2>
+				<div class="input-group" style="margin-top: 20px;">
+					<input type="text" class="form-control search_input" placeholder="请输入分类目录">
+					<div class="input-group-btn">
+						<button type="button" class="btn btn-primary search_btn">
+							查找
+						</button>
+					</div>
+				</div>
+			</div>
+		</div>
+		<style type="text/css">
+
+		</style>
+		<div class="row" style="padding-bottom: 30px;border-bottom: 2px solid #e0e0e0;">
+			<div class="col-md-10 col-md-offset-1" id="dir_header">
+
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-10 col-md-offset-1 product_content">
+
+			</div>
+		</div>
+	</div>
+</div>
+<!--二级菜单模板-->
+<div id="product_template" style="display: none;">
+	<div class="content_second">
+		<div class="content_second_title">
+
+		</div>
+		<table class="table dT">
+			<tr>
+				<td style="width: 30%" class="tt">
+					<div class="content_second_main">
+
+					</div>
+
+				</td>
+				<td style="width: 70%" class="detail_content" id="detail_content">
+
+				</td>
+			</tr>
+		</table>
+	</div>
+</div>
+<!--三级菜单模板-->
+<div id="detail_template" style="display: none;">
+	<div class="data-list">
+		<div class="list-outer">
+			<table style="width: 100%;">
+				<tr>
+					<td style="vertical-align: top;width: 25%;">
+						<div class="pull-left number">
+
+						</div>
+					</td>
+					<td style="width: 75%;">
+						<div class="pull-left data_main">
+							<div>
+								<a style="font-size: 18px;" class="product_title"></a>
+							</div>
+							<table class="detail_table">
+								<tbody>
+								<tr>
+									<td style="width: 25%">产品描述：</td>
+									<td class="product_description" style="width: 75%;"></td>
+								</tr>
+								<tr>
+									<td>预期用途：</td>
+									<td class="excepted_use"></td>
+								</tr>
+								<tr>
+									<td>品名举例：</td>
+									<td class="product_example"></td>
+								</tr>
+								</tbody>
+							</table>
+						</div>
+					</td>
+				</tr>
+
+			</table>
+		</div>
+	</div>
+</div>
+
+<script type="text/javascript">
+    $(function () { $("[data-toggle='tooltip']").tooltip(); });
+</script>
+</body>
+</html>

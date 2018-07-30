@@ -1,0 +1,34 @@
+{
+  "version": true,
+  "from": "#from",
+  "size": "#size",
+  "sort": [
+    {
+      "approval_date": {
+        "order": "desc",
+        "unmapped_type": "boolean"
+      }
+    }
+  ],
+  "query": {
+    "bool": {
+      "must": [
+        {
+          "query_string": {
+            "analyze_wildcard": true,
+            "query":"#query",
+            "phrase_slop":5
+          }
+        }
+      ],
+      "must_not": []
+    }
+  },
+  "_source": {
+    "includes": ["#includes"]
+  },
+  "stored_fields": [
+    "*"
+  ],
+  "script_fields": {}
+}

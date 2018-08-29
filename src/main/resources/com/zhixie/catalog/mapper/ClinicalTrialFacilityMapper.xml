@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+        <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zhixie.catalog.mapper.ClinicalTrialFacilityMapper">
+
+    <select id="selectClinicalInstitutionListByMap" resultType="map" parameterType="map">
+        select * from clinic_list where (hospital_name like #{name} or register_code like #{name})
+        <if test="province != null">
+            and province = #{province}
+        </if>
+        limit #{startnum},10
+    </select>
+
+    <select id="selectClinicalInstitutionListCountByMap" resultType="int" parameterType="map">
+        select count(*) from clinic_list where (hospital_name like #{name} or register_code like #{name})
+        <if test="province != null">
+            and province = #{province}
+        </if>
+    </select>
+
+    <select id="selectClinicalInstitutionListById" resultType="map" parameterType="string">
+        select * from clinic_list where id = #{id}
+    </select>
+
+    <select id="selectClinicalInstitutionInfoByMap" resultType="map" parameterType="map">
+        select * from clinic_info where (profession_name like #{name} or main_researcher like #{name}) limit #{startnum},10
+    </select>
+
+    <select id="selectClinicalInstitutionInfoCountByMap" resultType="int" parameterType="map">
+        select count(*) from clinic_info where
+        <if test="name != null">
+          (profession_name like #{name} or main_researcher like #{name})
+        </if>
+        <if test="pid != null">
+            pid = #{pid}
+        </if>
+    </select>
+
+    <select id="selectClinicalInstitutionInfoByPid" resultType="map" parameterType="string">
+        select * from clinic_info where pid = #{pid}
+    </select>
+
+    <select id="selectClinicalInstitutionListGroupByProvinceByName" resultType="map" parameterType="string">
+        select province,count(*) as num from clinic_list where hospital_name like #{name} or register_code like #{name} group by province
+    </select>
+</mapper>

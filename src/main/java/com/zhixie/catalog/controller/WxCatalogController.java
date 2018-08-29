@@ -1,4 +1,5 @@
 package com.zhixie.catalog.controller;
+import com.google.gson.GsonBuilder;
 import com.zhixie.catalog.model.Catalogs;
 import com.zhixie.catalog.model.wechat.WxspUserInfo;
 import com.zhixie.catalog.service.CatalogService;
@@ -11,20 +12,18 @@ import org.springframework.web.bind.annotation.RestController;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @RestController
 public class WxCatalogController {
+
     @Autowired
     private CatalogService catalogService;
     @Autowired
     private WxSearchService wxSearchService;
 
     /**
-     * 查看所有的一级编号
+     * 查看分类目录所有的一级编号
      * @param request
      * @param response
      * @return

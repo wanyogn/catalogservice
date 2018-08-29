@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="UTF-8" ?>
         <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.zhixie.catalog.mapper.CatalogMapper">
-<resultMap id="resultMap" type="com.zhixie.catalog.model.Catalogs">
-    <result property="id" column="id"></result>
-    <result property="pid" column="pid"></result>
-    <result property="name" column="name"></result>
-    <result property="content" column="content"></result>
-    <result property="code" column="code"></result>
-</resultMap>
-<select id="selectDirectory" resultType="map" parameterType="int">
-    SELECT c.id,c.code,c.name,c.content FROM zhixie_catalog c WHERE c.pid = #{pid}
-</select>
-<select id="selectDirByCode" resultMap="resultMap" parameterType="map">
-    SELECT c.id,c.code,c.name FROM zhixie_catalog c WHERE c.pid = #{pid} AND c.code = #{code}
-</select>
+    <resultMap id="resultMap" type="com.zhixie.catalog.model.Catalogs">
+        <result property="id" column="id"></result>
+        <result property="pid" column="pid"></result>
+        <result property="name" column="name"></result>
+        <result property="content" column="content"></result>
+        <result property="code" column="code"></result>
+    </resultMap>
+    <select id="selectDirectory" resultType="map" parameterType="int">
+        SELECT c.id,c.code,c.name,c.content FROM zhixie_catalog c WHERE c.pid = #{pid}
+    </select>
+    <select id="selectDirByCode" resultMap="resultMap" parameterType="map">
+        SELECT c.id,c.code,c.name FROM zhixie_catalog c WHERE c.pid = #{pid} AND c.code = #{code}
+    </select>
 </mapper>

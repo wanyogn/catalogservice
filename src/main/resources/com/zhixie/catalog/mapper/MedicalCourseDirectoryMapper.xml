@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+        <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zhixie.catalog.mapper.MedicalCourseDirectoryMapper">
+
+    <select id="selectTreatDirectoryById" resultType="map" parameterType="int">
+        SELECT id,code,name,num FROM zhixie_treatment_dir WHERE id = #{id}
+    </select>
+    <select id="selectTreatDirectoryByPid" resultType="map" parameterType="int">
+        SELECT id,code,name,num FROM zhixie_treatment_dir WHERE pid = #{pid}
+    </select>
+</mapper>

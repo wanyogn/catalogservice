@@ -1,4 +1,4 @@
-package com.zhixie.catalog.service.impll;
+package com.zhixie.catalog.service.impl;
 
 import com.zhixie.catalog.mapper.WxSearchMapper;
 import com.zhixie.catalog.model.wechat.WxspUserInfo;

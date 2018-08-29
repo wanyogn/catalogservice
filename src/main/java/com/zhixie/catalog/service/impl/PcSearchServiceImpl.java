@@ -1,4 +1,4 @@
-package com.zhixie.catalog.service.impll;
+package com.zhixie.catalog.service.impl;
 
 import com.zhixie.catalog.mapper.PcSearchMapper;
 import com.zhixie.catalog.service.PcSearchService;

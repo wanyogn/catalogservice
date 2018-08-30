@@ -33,9 +33,13 @@ public class ClinicalTrialFacilityController {
 
         String name = request.getParameter("name");
         String province = request.getParameter("province");
-        int num = Integer.valueOf(request.getParameter("num"));
+        String num_string = request.getParameter("num");
+
 
         Map<String,Object> temp = new HashMap<>();
+        if(name == null) name = "";
+        if(num_string == null) num_string = "0";
+        int num = Integer.valueOf(num_string);
         temp.put("name","%"+name+"%");
         temp.put("province",province);
         temp.put("startnum",10*num);
@@ -123,6 +127,26 @@ public class ClinicalTrialFacilityController {
         Map<String,Object> map = new HashMap<>();
         map.put("data",list);
         map.put("count",clinicalTrialFacilityService.selectClinicalInstitutionInfoCountByMap(temp));
+
+        return new GsonBuilder().create().toJson(map);
+    }
+
+    /**
+     *  聚合省份
+     * @param request
+     * @param response
+     * @return
+     */
+    @RequestMapping("/catalog/selectClinicalInstitutionGroup")
+    public String selectClinicalInstitutionGroup(HttpServletRequest request, HttpServletResponse response){
+        response.setHeader("Access-Control-Allow-Origin", "*");
+
+        String name = request.getParameter("name");
+        if(name == null) name = "%%";
+
+        ArrayList<Map<String,Object>> list = clinicalTrialFacilityService.selectClinicalInstitutionListGroupByProvinceByName(name);
+        Map<String,Object> map = new HashMap<>();
+        map.put("data",list);
 
         return new GsonBuilder().create().toJson(map);
     }

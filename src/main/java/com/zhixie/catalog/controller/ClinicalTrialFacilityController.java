@@ -150,4 +150,25 @@ public class ClinicalTrialFacilityController {
 
         return new GsonBuilder().create().toJson(map);
     }
+
+    /**
+     *  根据名称查找机构伦理信息
+     * @param request
+     * @param response
+     * @return
+     */
+    @RequestMapping("/catalog/selectInstitutionEthicalInfoByName")
+    public String selectInstitutionEthicalInfoByName(HttpServletRequest request, HttpServletResponse response){
+        response.setHeader("Access-Control-Allow-Origin", "*");
+
+        String name = request.getParameter("name");
+        if(name == null) name = "%%";
+        name = "%"+name+"%";
+
+        Map<String,Object> list = clinicalTrialFacilityService.selectInstitutionEthicalInfoByName(name);
+        Map<String,Object> map = new HashMap<>();
+        map.put("data",list);
+
+        return new GsonBuilder().create().toJson(map);
+    }
 }

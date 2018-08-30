@@ -44,4 +44,8 @@
     <select id="selectClinicalInstitutionListGroupByProvinceByName" resultType="map" parameterType="string">
         select province,count(*) as num from clinic_list where hospital_name like #{name} or register_code like #{name} group by province
     </select>
+
+    <select id="selectInstitutionEthicalInfoByName" resultType="map" parameterType="string">
+        select hospital_name,hospital_info,hospital_basic_info,hospital_ethical_info from institution_ethical_info where hospital_name like #{name}
+    </select>
 </mapper>

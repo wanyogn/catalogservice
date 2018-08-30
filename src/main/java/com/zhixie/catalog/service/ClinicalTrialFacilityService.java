@@ -28,4 +28,7 @@ public interface ClinicalTrialFacilityService {
 
     //根据关键字查询临床试验机构备案列表聚合信息(聚合省份)
     ArrayList<Map<String,Object>> selectClinicalInstitutionListGroupByProvinceByName(String name);
+
+    //根据名称查找机构伦理信息
+    Map<String,Object> selectInstitutionEthicalInfoByName(String name);
 }

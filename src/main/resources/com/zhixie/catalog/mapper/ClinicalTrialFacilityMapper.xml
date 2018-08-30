@@ -3,7 +3,8 @@
 <mapper namespace="com.zhixie.catalog.mapper.ClinicalTrialFacilityMapper">
 
     <select id="selectClinicalInstitutionListByMap" resultType="map" parameterType="map">
-        select * from clinic_list where (hospital_name like #{name} or register_code like #{name})
+        select id,register_code,hospital_name,hospital_grade,hospital_address,contact_person,contact_phone,approval_date_original,province
+        from clinic_list where (hospital_name like #{name} or register_code like #{name})
         <if test="province != null">
             and province = #{province}
         </if>
@@ -18,7 +19,8 @@
     </select>
 
     <select id="selectClinicalInstitutionListById" resultType="map" parameterType="string">
-        select * from clinic_list where id = #{id}
+        select id,register_code,hospital_name,hospital_grade,hospital_address,contact_person,contact_phone,approval_date_original,province
+        from clinic_list where id = #{id}
     </select>
 
     <select id="selectClinicalInstitutionListByInfoMap" resultType="map" parameterType="map">
@@ -26,7 +28,8 @@
     </select>
 
     <select id="selectClinicalInstitutionInfoByMap" resultType="map" parameterType="map">
-        select * from clinic_info where (profession_name like #{name} or main_researcher like #{name}) and pid = #{pid}
+        select id,pid,profession_name,main_researcher,job_title
+        from clinic_info where (profession_name like #{name} or main_researcher like #{name}) and pid = #{pid}
     </select>
 
     <select id="selectClinicalInstitutionInfoCountByMap" resultType="int" parameterType="map">
@@ -34,7 +37,8 @@
     </select>
 
     <select id="selectClinicalInstitutionInfoByPid" resultType="map" parameterType="string">
-        select * from clinic_info where pid = #{pid}
+        select id,pid,profession_name,main_researcher,job_title
+        from clinic_info where pid = #{pid}
     </select>
 
     <select id="selectClinicalInstitutionListGroupByProvinceByName" resultType="map" parameterType="string">

@@ -75,7 +75,7 @@ public class ClinicalTrialFacilityController {
      */
     @RequestMapping("/catalog/selectClinicalInstitutionListByInfoMap")
     public String selectClinicalInstitutionListByInfoMap(HttpServletRequest request, HttpServletResponse response){
-        long startTime=System.currentTimeMillis();
+        //long startTime=System.currentTimeMillis();
         response.setHeader("Access-Control-Allow-Origin", "*");
 
         String name = request.getParameter("name");
@@ -99,8 +99,8 @@ public class ClinicalTrialFacilityController {
             dataList.add(data);
         }
         map.put("data",dataList);
-        long endTime=System.currentTimeMillis();
-        System.out.println("程序运行时间： "+(endTime-startTime)+"ms");
+        //long endTime=System.currentTimeMillis();
+        //System.out.println("程序运行时间： "+(endTime-startTime)+"ms");
 
         return new GsonBuilder().create().toJson(map);
     }

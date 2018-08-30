@@ -68,25 +68,39 @@ public class ClinicalTrialFacilityController {
     }
 
     /**
-     *  根据条件查询临床试验机构备案专业信息
+     *  根据专业条件查询临床试验机构备案列表信息
      * @param request
      * @param response
      * @return
      */
-    @RequestMapping("/catalog/selectClinicalInstitutionInfoByMap")
-    public String selectClinicalInstitutionInfoByMap(HttpServletRequest request, HttpServletResponse response){
+    @RequestMapping("/catalog/selectClinicalInstitutionListByInfoMap")
+    public String selectClinicalInstitutionListByInfoMap(HttpServletRequest request, HttpServletResponse response){
+        long startTime=System.currentTimeMillis();
         response.setHeader("Access-Control-Allow-Origin", "*");
 
         String name = request.getParameter("name");
         int num = Integer.valueOf(request.getParameter("num"));
+        ArrayList<Map<String,Object>> dataList = new ArrayList<>();
+        Map<String,Object> map = new HashMap<>();
+
         Map<String,Object> temp = new HashMap<>();
         temp.put("name","%"+name+"%");
         temp.put("startnum",10*num);
 
-        ArrayList<Map<String,Object>> list = clinicalTrialFacilityService.selectClinicalInstitutionInfoByMap(temp);
-        Map<String,Object> map = new HashMap<>();
-        map.put("data",list);
         if(num == 0) map.put("count",clinicalTrialFacilityService.selectClinicalInstitutionInfoCountByMap(temp));
+
+        ArrayList<Map<String,Object>> list = clinicalTrialFacilityService.selectClinicalInstitutionListByInfoMap(temp);
+        for(Map<String,Object> t : list){
+            String pid = (String) t.get("pid");
+            Map<String,Object> data = clinicalTrialFacilityService.selectClinicalInstitutionListById(pid);
+            temp.put("pid",pid);
+            ArrayList<Map<String,Object>> secondList = clinicalTrialFacilityService.selectClinicalInstitutionInfoByMap(temp);
+            data.put("secondList",secondList);
+            dataList.add(data);
+        }
+        map.put("data",dataList);
+        long endTime=System.currentTimeMillis();
+        System.out.println("程序运行时间： "+(endTime-startTime)+"ms");
 
         return new GsonBuilder().create().toJson(map);
     }

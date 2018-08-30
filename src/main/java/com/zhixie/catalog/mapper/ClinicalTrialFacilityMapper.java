@@ -14,6 +14,8 @@ public interface ClinicalTrialFacilityMapper {
 
     Map<String,Object> selectClinicalInstitutionListById(String id);
 
+    ArrayList<Map<String,Object>> selectClinicalInstitutionListByInfoMap(Map<String,Object> map);
+
     ArrayList<Map<String,Object>> selectClinicalInstitutionInfoByMap(Map<String,Object> map);
 
     int selectClinicalInstitutionInfoCountByMap(Map<String,Object> map);

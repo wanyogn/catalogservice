@@ -21,18 +21,16 @@
         select * from clinic_list where id = #{id}
     </select>
 
+    <select id="selectClinicalInstitutionListByInfoMap" resultType="map" parameterType="map">
+        select pid from clinic_info where (profession_name like #{name} or main_researcher like #{name}) group by pid limit #{startnum},10
+    </select>
+
     <select id="selectClinicalInstitutionInfoByMap" resultType="map" parameterType="map">
-        select * from clinic_info where (profession_name like #{name} or main_researcher like #{name}) limit #{startnum},10
+        select * from clinic_info where (profession_name like #{name} or main_researcher like #{name}) and pid = #{pid}
     </select>
 
     <select id="selectClinicalInstitutionInfoCountByMap" resultType="int" parameterType="map">
-        select count(*) from clinic_info where
-        <if test="name != null">
-          (profession_name like #{name} or main_researcher like #{name})
-        </if>
-        <if test="pid != null">
-            pid = #{pid}
-        </if>
+        select count(*) from (select * from clinic_info where (profession_name like #{name} or main_researcher like #{name}) group by pid) a
     </select>
 
     <select id="selectClinicalInstitutionInfoByPid" resultType="map" parameterType="string">

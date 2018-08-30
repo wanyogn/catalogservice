@@ -14,6 +14,9 @@ public interface ClinicalTrialFacilityService {
     //根据id查询临床试验机构备案列表信息
     Map<String,Object> selectClinicalInstitutionListById(String id);
 
+    //根据条件查询临床试验机构备案专业的列表信息
+    ArrayList<Map<String,Object>> selectClinicalInstitutionListByInfoMap(Map<String,Object> map);
+
     //根据条件查询临床试验机构备案专业信息
     ArrayList<Map<String,Object>> selectClinicalInstitutionInfoByMap(Map<String,Object> map);
 

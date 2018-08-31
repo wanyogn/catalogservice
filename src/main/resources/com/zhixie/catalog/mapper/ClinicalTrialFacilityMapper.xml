@@ -46,6 +46,6 @@
     </select>
 
     <select id="selectInstitutionEthicalInfoByName" resultType="map" parameterType="string">
-        select hospital_name,hospital_info,hospital_basic_info,hospital_ethical_info from institution_ethical_info where hospital_name like #{name}
+        select hospital_name,hospital_info,hospital_basic_info,hospital_ethical_info from institution_ethical_info where hospital_name = #{name}
     </select>
 </mapper>

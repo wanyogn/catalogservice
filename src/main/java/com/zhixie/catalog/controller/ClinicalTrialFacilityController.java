@@ -152,7 +152,7 @@ public class ClinicalTrialFacilityController {
     }
 
     /**
-     *  根据名称查找机构伦理信息
+     *  根据机构名称查找机构伦理信息
      * @param request
      * @param response
      * @return
@@ -162,8 +162,6 @@ public class ClinicalTrialFacilityController {
         response.setHeader("Access-Control-Allow-Origin", "*");
 
         String name = request.getParameter("name");
-        if(name == null) name = "%%";
-        name = "%"+name+"%";
 
         Map<String,Object> list = clinicalTrialFacilityService.selectInstitutionEthicalInfoByName(name);
         Map<String,Object> map = new HashMap<>();

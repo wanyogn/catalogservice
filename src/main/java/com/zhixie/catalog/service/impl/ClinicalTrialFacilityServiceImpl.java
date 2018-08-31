@@ -55,7 +55,7 @@ public class ClinicalTrialFacilityServiceImpl implements ClinicalTrialFacilitySe
     }
 
     @Override
-    public Map<String,Object> selectInstitutionEthicalInfoByName(String name) {
+    public ArrayList<Map<String,Object>> selectInstitutionEthicalInfoByName(String name) {
         return clinicalTrialFacilityMapper.selectInstitutionEthicalInfoByName(name);
     }
 }

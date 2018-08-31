@@ -163,7 +163,7 @@ public class ClinicalTrialFacilityController {
 
         String name = request.getParameter("name");
 
-        Map<String,Object> list = clinicalTrialFacilityService.selectInstitutionEthicalInfoByName(name);
+        ArrayList<Map<String,Object>> list = clinicalTrialFacilityService.selectInstitutionEthicalInfoByName(name);
         Map<String,Object> map = new HashMap<>();
         map.put("data",list);
 

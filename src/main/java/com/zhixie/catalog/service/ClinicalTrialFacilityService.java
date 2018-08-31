@@ -30,5 +30,5 @@ public interface ClinicalTrialFacilityService {
     ArrayList<Map<String,Object>> selectClinicalInstitutionListGroupByProvinceByName(String name);
 
     //根据名称查找机构伦理信息
-    Map<String,Object> selectInstitutionEthicalInfoByName(String name);
+    ArrayList<Map<String,Object>> selectInstitutionEthicalInfoByName(String name);
 }

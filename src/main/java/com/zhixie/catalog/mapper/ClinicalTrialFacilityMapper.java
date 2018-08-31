@@ -24,5 +24,5 @@ public interface ClinicalTrialFacilityMapper {
 
     ArrayList<Map<String,Object>> selectClinicalInstitutionListGroupByProvinceByName(String name);
 
-    Map<String,Object> selectInstitutionEthicalInfoByName(String name);
+    ArrayList<Map<String,Object>> selectInstitutionEthicalInfoByName(String name);
 }

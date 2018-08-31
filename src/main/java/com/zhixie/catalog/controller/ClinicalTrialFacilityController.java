@@ -40,6 +40,10 @@ public class ClinicalTrialFacilityController {
         if(name == null) name = "";
         if(num_string == null) num_string = "0";
         int num = Integer.valueOf(num_string);
+
+        if(province != null) province = province.replace(",","|");
+        if(profession_name != null) profession_name = "^"+profession_name.replace(",","|^");
+
         temp.put("name","%"+name+"%");
         temp.put("startnum",10*num);
         temp.put("province",province);
@@ -88,6 +92,8 @@ public class ClinicalTrialFacilityController {
         String province = request.getParameter("province");
         ArrayList<Map<String,Object>> dataList = new ArrayList<>();
         Map<String,Object> map = new HashMap<>();
+
+        if(province != null) province = province.replace(",","|");
 
         Map<String,Object> temp = new HashMap<>();
         temp.put("name","%"+name+"%");

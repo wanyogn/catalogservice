@@ -46,8 +46,9 @@
     </select>
 
     <select id="selectClinicalInstitutionInfoByMap" resultType="map" parameterType="map">
-        select id,pid,profession_name,main_researcher,job_title
+        select id,pid,profession_name,main_researcher,job_title,count(*) as num
         from clinic_info where (profession_name like #{name} or main_researcher like #{name}) and pid = #{pid}
+        group by profession_name
     </select>
 
     <select id="selectClinicalInstitutionInfoCountByMap" resultType="int" parameterType="map">

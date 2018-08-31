@@ -135,6 +135,29 @@ public class ClinicalTrialFacilityController {
     }
 
     /**
+     *  根据条件查询折叠起来的专业信息
+     * @param request
+     * @param response
+     * @return
+     */
+    @RequestMapping("/catalog/selectClinicalInstitutionHiddenInfoByMap")
+    public String selectClinicalInstitutionHiddenInfoByMap(HttpServletRequest request, HttpServletResponse response){
+        response.setHeader("Access-Control-Allow-Origin", "*");
+
+        String pid = request.getParameter("pid");
+        String profession_name = request.getParameter("profession_name");
+        Map<String,Object> temp = new HashMap<>();
+        temp.put("pid",pid);
+        temp.put("profession_name",profession_name);
+
+        ArrayList<Map<String,Object>> list = clinicalTrialFacilityService.selectClinicalInstitutionHiddenInfoByMap(temp);
+        Map<String,Object> map = new HashMap<>();
+        map.put("data",list);
+
+        return new GsonBuilder().create().toJson(map);
+    }
+
+    /**
      *  聚合省份
      * @param request
      * @param response

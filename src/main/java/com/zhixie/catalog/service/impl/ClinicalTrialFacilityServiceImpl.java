@@ -50,6 +50,11 @@ public class ClinicalTrialFacilityServiceImpl implements ClinicalTrialFacilitySe
     }
 
     @Override
+    public ArrayList<Map<String, Object>> selectClinicalInstitutionHiddenInfoByMap(Map<String, Object> map) {
+        return clinicalTrialFacilityMapper.selectClinicalInstitutionHiddenInfoByMap(map);
+    }
+
+    @Override
     public ArrayList<Map<String, Object>> selectClinicalInstitutionListGroupByProvinceByName(String name) {
         return clinicalTrialFacilityMapper.selectClinicalInstitutionListGroupByProvinceByName(name);
     }

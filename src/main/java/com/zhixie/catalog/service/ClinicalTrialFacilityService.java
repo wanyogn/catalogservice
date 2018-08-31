@@ -26,6 +26,9 @@ public interface ClinicalTrialFacilityService {
     //根据pid查询临床试验机构备案专业信息
     ArrayList<Map<String,Object>> selectClinicalInstitutionInfoByPid(String pid);
 
+    //根据条件查询折叠起来的专业信息
+    ArrayList<Map<String,Object>> selectClinicalInstitutionHiddenInfoByMap(Map<String,Object> map);
+
     //根据关键字查询临床试验机构备案列表聚合信息(聚合省份)
     ArrayList<Map<String,Object>> selectClinicalInstitutionListGroupByProvinceByName(String name);
 

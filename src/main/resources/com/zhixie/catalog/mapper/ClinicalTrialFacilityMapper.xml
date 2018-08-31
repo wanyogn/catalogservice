@@ -61,8 +61,13 @@
     </select>
 
     <select id="selectClinicalInstitutionInfoByPid" resultType="map" parameterType="string">
+        select id,pid,profession_name,main_researcher,job_title,count(*) as num
+        from clinic_info where pid = #{pid} group by profession_name
+    </select>
+
+    <select id="selectClinicalInstitutionHiddenInfoByMap" resultType="map" parameterType="map">
         select id,pid,profession_name,main_researcher,job_title
-        from clinic_info where pid = #{pid}
+        from clinic_info where pid = #{pid} and profession_name = #{profession_name}
     </select>
 
     <select id="selectClinicalInstitutionListGroupByProvinceByName" resultType="map" parameterType="string">

@@ -32,17 +32,18 @@ public class ClinicalTrialFacilityController {
         response.setHeader("Access-Control-Allow-Origin", "*");
 
         String name = request.getParameter("name");
-        String province = request.getParameter("province");
         String num_string = request.getParameter("num");
-
+        String province = request.getParameter("province");
+        String profession_name = request.getParameter("profession_name");
 
         Map<String,Object> temp = new HashMap<>();
         if(name == null) name = "";
         if(num_string == null) num_string = "0";
         int num = Integer.valueOf(num_string);
         temp.put("name","%"+name+"%");
-        temp.put("province",province);
         temp.put("startnum",10*num);
+        temp.put("province",province);
+        temp.put("profession_name",profession_name);
 
         ArrayList<Map<String,Object>> list = clinicalTrialFacilityService.selectClinicalInstitutionListByMap(temp);
         Map<String,Object> map = new HashMap<>();

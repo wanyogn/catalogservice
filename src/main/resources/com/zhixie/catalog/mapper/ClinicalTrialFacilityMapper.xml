@@ -3,18 +3,31 @@
 <mapper namespace="com.zhixie.catalog.mapper.ClinicalTrialFacilityMapper">
 
     <select id="selectClinicalInstitutionListByMap" resultType="map" parameterType="map">
-        select id,register_code,hospital_name,hospital_grade,hospital_address,contact_person,contact_phone,approval_date_original,province
-        from clinic_list where (hospital_name like #{name} or register_code like #{name})
+        select distinct l.id,l.register_code,l.hospital_name,l.hospital_grade,l.hospital_address,l.contact_person,l.contact_phone,l.approval_date_original,l.province
+        from clinic_list l,clinic_info i where l.id = i.pid
+        <if test="name != null">
+            and (l.hospital_name like #{name} or l.register_code like #{name})
+        </if>
         <if test="province != null">
-            and province = #{province}
+            and l.province regexp #{province}
+        </if>
+        <if test="profession_name != null">
+            and i.profession_name regexp #{profession_name}
         </if>
         limit #{startnum},10
     </select>
 
     <select id="selectClinicalInstitutionListCountByMap" resultType="int" parameterType="map">
-        select count(*) from clinic_list where (hospital_name like #{name} or register_code like #{name})
+        select count(distinct l.id)
+        from clinic_list l,clinic_info i where l.id = i.pid
+        <if test="name != null">
+            and (l.hospital_name like #{name} or l.register_code like #{name})
+        </if>
         <if test="province != null">
-            and province = #{province}
+            and l.province regexp #{province}
+        </if>
+        <if test="profession_name != null">
+            and i.profession_name regexp #{profession_name}
         </if>
     </select>
 

@@ -85,12 +85,14 @@ public class ClinicalTrialFacilityController {
 
         String name = request.getParameter("name");
         int num = Integer.valueOf(request.getParameter("num"));
+        String province = request.getParameter("province");
         ArrayList<Map<String,Object>> dataList = new ArrayList<>();
         Map<String,Object> map = new HashMap<>();
 
         Map<String,Object> temp = new HashMap<>();
         temp.put("name","%"+name+"%");
         temp.put("startnum",10*num);
+        temp.put("province",province);
 
         if(num == 0) map.put("count",clinicalTrialFacilityService.selectClinicalInstitutionInfoCountByMap(temp));
 

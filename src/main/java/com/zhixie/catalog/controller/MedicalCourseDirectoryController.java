@@ -38,8 +38,10 @@ public class MedicalCourseDirectoryController {
         if(id_string == null) id_string = "0";
 
         int id = Integer.valueOf(id_string);
-        Map<String,Object> parentTemp = medicalCourseDirectoryService.selectTreatDirectoryById(id);
-        map.put("parent",parentTemp);
+        if(id != 0) {
+            Map<String, Object> parentTemp = medicalCourseDirectoryService.selectTreatDirectoryById(id);
+            map.put("parent", parentTemp);
+        }
 
         ArrayList<Map<String,Object>> list = medicalCourseDirectoryService.selectTreatDirectoryByPid(id);
         map.put("list",list);

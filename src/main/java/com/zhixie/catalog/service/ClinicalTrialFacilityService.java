@@ -20,7 +20,7 @@ public interface ClinicalTrialFacilityService {
     //根据条件查询临床试验机构备案专业信息
     ArrayList<Map<String,Object>> selectClinicalInstitutionInfoByMap(Map<String,Object> map);
 
-    //根据条件查询临床试验机构备案专业数量
+    //根据专业等条件查询机构数量
     int selectClinicalInstitutionInfoCountByMap(Map<String,Object> map);
 
     //根据pid查询临床试验机构备案专业信息
@@ -34,4 +34,7 @@ public interface ClinicalTrialFacilityService {
 
     //根据名称查找机构伦理信息
     ArrayList<Map<String,Object>> selectInstitutionEthicalInfoByName(String name);
+
+    //根据专业名称查询专业数量
+    int selectClinicalProfessionCountByMap(Map<String,Object> map);
 }

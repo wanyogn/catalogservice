@@ -63,4 +63,9 @@ public class ClinicalTrialFacilityServiceImpl implements ClinicalTrialFacilitySe
     public ArrayList<Map<String,Object>> selectInstitutionEthicalInfoByName(String name) {
         return clinicalTrialFacilityMapper.selectInstitutionEthicalInfoByName(name);
     }
+
+    @Override
+    public int selectClinicalProfessionCountByMap(Map<String, Object> map) {
+        return clinicalTrialFacilityMapper.selectClinicalProfessionCountByMap(map);
+    }
 }

@@ -78,4 +78,12 @@
     <select id="selectInstitutionEthicalInfoByName" resultType="map" parameterType="string">
         select hospital_name,hospital_info,hospital_basic_info,hospital_ethical_info from institution_ethical_info where hospital_name = #{name}
     </select>
+
+    <select id="selectClinicalProfessionCountByMap" resultType="int" parameterType="map">
+        select count(*)
+        from clinic_info
+        <if test="profession_name != null">
+            where profession_name regexp #{profession_name}
+        </if>
+    </select>
 </mapper>

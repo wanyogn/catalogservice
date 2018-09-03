@@ -34,6 +34,7 @@ public class ClinicalTrialFacilityController {
         String name = request.getParameter("name");
         String num_string = request.getParameter("num");
         String province = request.getParameter("province");
+        System.out.println(province);
         String profession_name = request.getParameter("profession_name");
 
         Map<String,Object> temp = new HashMap<>();

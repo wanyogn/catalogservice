@@ -44,18 +44,21 @@ public class MedicalCourseDirectoryController {
         int id = Integer.valueOf(id_string);
 
         ArrayList<Map<String,Object>> list = medicalCourseDirectoryService.selectTreatDirectoryByPid(id);
-        if(id == 0){
-            int num = 0;
-            Map<String,Object> tmap = new HashMap<>();
-            for(Map<String,Object> t : list){
-                String name = (String) t.get("name");
+        int num = 0;
+        Map<String,Object> tmap = new HashMap<>();
+        for(Map<String,Object> t : list){
+            String name = (String) t.get("name");
+            if(id == 0){
                 tmap.put("profession_name","^"+name);
-                num = clinicalTrialFacilityService.selectClinicalInstitutionListCountByMap(tmap);
-                t.put("institution_num",num);
-                num = clinicalTrialFacilityService.selectClinicalProfessionCountByMap(tmap);
-                t.put("profession_num",num);
+            }else{
+                tmap.put("profession_name",name);
             }
+            num = clinicalTrialFacilityService.selectClinicalInstitutionListCountByMap(tmap);
+            t.put("institution_num",num);
+            num = clinicalTrialFacilityService.selectClinicalProfessionCountByMap(tmap);
+            t.put("profession_num",num);
         }
+
         map.put("list",list);
         //long endTime=System.currentTimeMillis();
         //System.out.println("程序运行时间： "+(endTime-startTime)+"ms");

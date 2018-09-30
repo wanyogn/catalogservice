@@ -193,7 +193,7 @@ public class CatalogController {
         String esCount = StaticVariable.esCount;
         esCount = esCount.replaceFirst("#query",condition);
         esCount = esCount.replaceFirst("\"#filter\"","");
-        String countRet = HttpHandler.httpPostCall("http://localhost:9200/second_product/_count", esCount);
+        String countRet = HttpHandler.httpPostCall("http://localhost:9200/product/_count", esCount);
         ESCount esCt = new GsonBuilder().create().fromJson(countRet, ESCount.class);
         productSet.setMatchCount(esCt.count);
         return new GsonBuilder().create().toJson(productSet);
@@ -233,7 +233,7 @@ public class CatalogController {
         else{ esRequest = esRequest.replaceFirst("\"#size\"",size); }
         esRequest = esRequest.replaceFirst("\"#includes\"","\"product_name_ch\"");
         String postbody = esRequest.replaceFirst("#query",condition);
-        String ret = HttpHandler.httpPostCall("http://localhost:9200/second_product/_search", postbody);
+        String ret = HttpHandler.httpPostCall("http://localhost:9200/product/_search", postbody);
         ESResultRoot retObj = new GsonBuilder().create().fromJson(ret, ESResultRoot.class);
         for(Hit hit:retObj.hits.hits){
             productSet.add(hit._source);
@@ -241,7 +241,7 @@ public class CatalogController {
         String esCount = StaticVariable.esCount;
         esCount = esCount.replaceFirst("#query",condition);
         esCount = esCount.replaceFirst("\"#filter\"","");
-        String countRet = HttpHandler.httpPostCall("http://localhost:9200/second_product/_count", esCount);
+        String countRet = HttpHandler.httpPostCall("http://localhost:9200/product/_count", esCount);
         ESCount esCt = new GsonBuilder().create().fromJson(countRet, ESCount.class);
         productSet.setMatchCount(esCt.count);
         return new GsonBuilder().create().toJson(productSet);
@@ -295,8 +295,10 @@ public class CatalogController {
         }catch (Exception e){
 
         }
+
         long start=System.currentTimeMillis(); //获取结束时间
         sourceSet.setDatas(scanResult(list));
+       // sourceSet.setDatas(list);
         long endTime=System.currentTimeMillis(); //获取结束时间
         System.out.println("scanResult程序运行时间： "+(endTime-start)+"ms");
         System.out.println("程序运行时间： "+(endTime-startTime)+"ms");
@@ -403,9 +405,11 @@ return "success";
         List<Integer> indexList = new ArrayList<>();
         for (int i = 0;i < list.size();i++){
             if(i > 0){
-                JSONObject json1 = JSONObject.fromObject(list.get(i));
-                JSONObject json2 = JSONObject.fromObject(list.get(i-1));
-                if(json1.get("second_product_number").toString().equals(json2.get("second_product_number").toString())){
+                String str1 = JSONObject.fromObject(list.get(i)).get("directory_number").toString()+JSONObject.fromObject(list.get(i)).get("first_product_number").toString()
+                        +JSONObject.fromObject(list.get(i)).get("second_product_number").toString();
+                String str2 = JSONObject.fromObject(list.get(i-1)).get("directory_number").toString()+JSONObject.fromObject(list.get(i-1)).get("first_product_number").toString()
+                        +JSONObject.fromObject(list.get(i-1)).get("second_product_number").toString();
+                if(str1.equals(str2)){
 
                 }else{
                     indexList.add(i);

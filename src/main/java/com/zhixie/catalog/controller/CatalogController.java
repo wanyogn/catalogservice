@@ -6,6 +6,7 @@ import com.sun.scenario.effect.impl.sw.sse.SSEBlend_SRC_OUTPeer;
 import com.zhixie.catalog.elasticsearch.Constant;
 import com.zhixie.catalog.helper.*;
 import com.zhixie.catalog.model.Catalog;
+import com.zhixie.catalog.model.ExemptionDir;
 import com.zhixie.catalog.model.common.IpGeograAddress;
 import com.zhixie.catalog.model.es.ESCount;
 import com.zhixie.catalog.model.es.ESResultRoot;
@@ -347,26 +348,21 @@ public class CatalogController {
         response.setContentType("text/html; charset=utf-8");
         response.setCharacterEncoding("UTF-8");
         ReadExcel excel = new ReadExcel();
-        List<Catalog> catalogs = excel.getExcelInfo(file);
+        List<ExemptionDir> catalogs = excel.getExcelInfo(file);
 
         try{
             for (int i = 0;i <catalogs.size();i++) {
-                Catalog catalog = catalogs.get(i);
+                ExemptionDir catalog = catalogs.get(i);
                 Map<String, Object> json = new HashMap<>();
-                json.put("flow_number", catalog.getFlow_number());
-                json.put("directory_number", catalog.getDirectory_number());
-                json.put("directory_name", catalog.getDirectory_name());
-                json.put("first_product_number", catalog.getFirst_product_number());
-                json.put("first_product_name", catalog.getFirst_product_name());
-                json.put("second_product_number", catalog.getSecond_product_number());
-                json.put("second_product_name", catalog.getSecond_product_name());
-                json.put("product_description", catalog.getProduct_description());
-                json.put("expected_use", catalog.getExpected_use());
-                json.put("product_example", catalog.getProduct_example());
-                json.put("management_category", catalog.getManagement_category());
-                json.put("composite_product", catalog.getComposite_product());
-                json.put("catalog_property",catalog.getRemark());
-                IndexRequest indexRequest = new IndexRequest("catalogs","catalog").source(json);
+                json.put("id",getId());
+                json.put("category",catalog.getCategory());
+                json.put("classify_code",catalog.getClassify_code());
+                json.put("product_name",catalog.getProduct_name());
+                json.put("product_description",catalog.getProduct_description());
+                json.put("management_category",catalog.getManagement_category());
+                json.put("remark",catalog.getRemark());
+
+                IndexRequest indexRequest = new IndexRequest("exemption_directory","directory").source(json);
                 IndexResponse response1 = ESClientFactory.getClient().index(indexRequest);
             }
         }catch(Exception e){
@@ -513,5 +509,15 @@ return "success";
         map.put("keyword", keyword);
         map.put("createdate",date);
         return pcSearchService.insertUserSearchInfo(map);
+    }
+    private String getId(){
+        String id = "";
+        //获取当前时间戳
+        SimpleDateFormat sf = new SimpleDateFormat("MMddHHmmssSSS");
+        String temp = sf.format(new Date());
+        //获取4位随机数
+        int random = (int)((Math.random()+1)*1000);
+        id = temp + random;
+        return id;
     }
 }

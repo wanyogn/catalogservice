@@ -1,6 +1,7 @@
 package com.zhixie.catalog.helper;
 
 import com.zhixie.catalog.model.Catalog;
+import com.zhixie.catalog.model.ExemptionDir;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
@@ -36,9 +37,9 @@ public class ReadExcel {
      * @param mFile
      * @return
      */
-    public List<Catalog> getExcelInfo(MultipartFile mFile) {
+    public List<ExemptionDir> getExcelInfo(MultipartFile mFile) {
         String fileName = mFile.getOriginalFilename();//获取文件名
-        List<Catalog> catalogList = null;
+        List<ExemptionDir> catalogList = null;
         try {
             if (!validateExcel(fileName)) {// 验证文件名是否合格
                 return null;
@@ -60,8 +61,8 @@ public class ReadExcel {
      * @return
      * @throws IOException
      */
-    public List<Catalog> createExcel(InputStream is, boolean isExcel2003) {
-        List<Catalog> catalogList = null;
+    public List<ExemptionDir> createExcel(InputStream is, boolean isExcel2003) {
+        List<ExemptionDir> catalogList = null;
         try{
             Workbook wb = null;
             if (isExcel2003) {// 当excel是2003时,创建excel2003
@@ -80,7 +81,7 @@ public class ReadExcel {
      * @param wb
      * @return
      */
-    private List<Catalog> readExcelValue(Workbook wb) {
+    private List<ExemptionDir> readExcelValue(Workbook wb) {
         // 得到第一个shell
         Sheet sheet = wb.getSheetAt(0);
         // 得到Excel的行数
@@ -90,46 +91,32 @@ public class ReadExcel {
         if (totalRows > 1 && sheet.getRow(0) != null) {
             this.totalCells = sheet.getRow(0).getPhysicalNumberOfCells();
         }
-        List<Catalog> catalogList = new ArrayList<Catalog>();
+        List<ExemptionDir> catalogList = new ArrayList<ExemptionDir>();
         // 循环Excel行数
         for (int r = 1; r < totalRows; r++) {
             Row row = sheet.getRow(r);
             if (row == null){
                 continue;
             }
-            Catalog catalog = new Catalog();
+            ExemptionDir catalog = new ExemptionDir();
             // 循环Excel的列
             for (int c = 0; c < this.totalCells; c++) {
                 Cell cell = row.getCell(c);
                 if (null != cell) {
                     if (c == 0) {
-                        catalog.setFlow_number(String.valueOf(cell.getStringCellValue()));
+                        catalog.setCategory(String.valueOf(cell.getStringCellValue()));
                     }else if (c == 1) {
                         row.getCell(1).setCellType(Cell.CELL_TYPE_STRING);
-                        catalog.setDirectory_number(String.valueOf(cell.getStringCellValue()));
+                        catalog.setClassify_code(String.valueOf(cell.getStringCellValue()));
                     }else if (c == 2){
-                        catalog.setDirectory_name(String.valueOf(cell.getStringCellValue()));
+                        catalog.setProduct_name(String.valueOf(cell.getStringCellValue()));
                     }else if(c == 3){
                         row.getCell(3).setCellType(Cell.CELL_TYPE_STRING);
-                        catalog.setFirst_product_number(String.valueOf(cell.getStringCellValue()));
+                        catalog.setProduct_description(String.valueOf(cell.getStringCellValue()));
                     }else if(c == 4){
-                        catalog.setFirst_product_name(String.valueOf(cell.getStringCellValue()));
+                        catalog.setManagement_category(String.valueOf(cell.getStringCellValue()));
                     }else if(c == 5){
                         row.getCell(5).setCellType(Cell.CELL_TYPE_STRING);
-                        catalog.setSecond_product_number(String.valueOf(cell.getStringCellValue()));
-                    }else if(c == 6){
-                        catalog.setSecond_product_name(String.valueOf(cell.getStringCellValue()));
-                    }else if(c == 7){
-                        catalog.setProduct_description(String.valueOf(cell.getStringCellValue()));
-                    }else if(c == 8){
-                        catalog.setExpected_use(String.valueOf(cell.getStringCellValue()));
-                    }else if(c == 9){
-                        catalog.setProduct_example(String.valueOf(cell.getStringCellValue()));
-                    }else if(c == 10){
-                        catalog.setManagement_category(String.valueOf(cell.getStringCellValue()));
-                    }else if(c == 11){
-                        catalog.setComposite_product(String.valueOf(cell.getStringCellValue()));
-                    }else if(c == 12){
                         catalog.setRemark(String.valueOf(cell.getStringCellValue()));
                     }
                 }

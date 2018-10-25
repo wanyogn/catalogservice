@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zhixie.catalog.mapper.ExhibitionMapper">
+    <!--根据展商名称查找-->
+    <select id="selectExhibition" parameterType="map" resultType="map">
+        SELECT id,pavilionid,boothid,exhibitorname FROM exhibitorsdb WHERE 1=1
+        <if test="exhibitorname != null">
+            AND exhibitorname LIKE CONCAT('%',#{exhibitorname},'%')
+        </if>
+        <if test="pavilionid != null">
+            AND pavilionid = #{pavilionid}
+        </if>
+        ORDER BY pavilionid ASC,boothid ASC limit #{startnum},#{size}
+    </select>
+
+    <select id="selectCountByName" parameterType="map" resultType="int">
+        SELECT COUNT(*) FROM exhibitorsdb WHERE 1=1
+        <if test="exhibitorname != null">
+            AND exhibitorname LIKE CONCAT('%',#{exhibitorname},'%')
+        </if>
+        <if test="pavilionid != null">
+            AND pavilionid = #{pavilionid}
+        </if>
+    </select>
+</mapper>
